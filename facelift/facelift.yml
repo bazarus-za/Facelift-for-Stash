@@ -1,0 +1,9 @@
+name: Facelift
+description: A complete landing page revamp featuring engaging micro-animations, glassmorphic panels, and a personalized "On This Day 1 Year Ago" spotlight.
+version: 1.0.0
+url: https://github.com/
+ui:
+  javascript:
+    - script.js
+  css:
+    - style.css

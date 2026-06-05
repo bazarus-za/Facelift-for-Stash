@@ -1,0 +1,2406 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+/* --- CUSTOM VARIABLES --- */
+:root {
+  --fl-bg: #0b0b0f;
+  --fl-panel-bg: rgba(20, 20, 28, 0.55);
+  --fl-panel-border: rgba(255, 255, 255, 0.06);
+  --fl-text-primary: #f8fafc;
+  --fl-text-secondary: #94a3b8;
+  --fl-text-muted: #64748b;
+  --fl-primary: #a855f7;
+  --fl-primary-glow: rgba(168, 85, 247, 0.35);
+  --fl-secondary: #06b6d4;
+  --fl-secondary-glow: rgba(6, 182, 212, 0.35);
+  --fl-accent: #f43f5e;
+  --fl-accent-glow: rgba(244, 63, 94, 0.35);
+  --fl-font: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --fl-card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* --- OVERALL APP CONTAINER --- */
+.facelift-landing-wrapper {
+  font-family: var(--fl-font);
+  background: var(--fl-bg);
+  min-height: 100vh;
+  color: var(--fl-text-primary);
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Animated fluid background spheres */
+.facelift-landing-wrapper::before,
+.facelift-landing-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+  animation: floatSpheres 25s infinite alternate ease-in-out;
+}
+
+.facelift-landing-wrapper::before {
+  background: radial-gradient(circle, var(--fl-primary) 0%, transparent 70%);
+  top: -10%;
+  left: -10%;
+}
+
+.facelift-landing-wrapper::after {
+  background: radial-gradient(circle, var(--fl-secondary) 0%, transparent 70%);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -10s;
+}
+
+@keyframes floatSpheres {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8%, 10%) scale(1.15); }
+  100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+/* Scrollbars */
+.facelift-landing-wrapper *::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.facelift-landing-wrapper *::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: 8px;
+}
+.facelift-landing-wrapper *::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+.facelift-landing-wrapper *::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* --- GLASS CONTAINER CARD --- */
+.facelift-card {
+  background: var(--fl-panel-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--fl-panel-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--fl-card-shadow);
+  z-index: 1;
+  position: relative;
+  transition: all 0.3s ease;
+  min-width: 0; /* Prevents overflow from stretching CSS grid columns */
+}
+
+.facelift-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --- HERO BANNER --- */
+.facelift-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.facelift-hero-content h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #fff 40%, var(--fl-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.facelift-hero-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Tiny Classic UI Button */
+.facelift-btn-classic-toggle {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--fl-text-secondary);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.facelift-btn-classic-toggle:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* --- GRID LAYOUT COLUMNS --- */
+.facelift-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-items: start;
+}
+
+.facelift-row-thirds {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .facelift-row-split {
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  }
+  .facelift-row-half {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .facelift-row-thirds {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .facelift-row-thirds {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* --- TIME MACHINE HEADER / SELECTORS --- */
+.facelift-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.facelift-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.facelift-section-title-icon {
+  background: linear-gradient(135deg, var(--fl-primary), var(--fl-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Form inputs & controls */
+.facelift-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.facelift-select {
+  background: rgba(15, 15, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--fl-text-primary);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.facelift-select:focus {
+  border-color: var(--fl-secondary);
+}
+
+.facelift-date-input {
+  background: rgba(15, 15, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--fl-text-primary);
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.facelift-date-input:focus {
+  border-color: var(--fl-secondary);
+}
+
+.facelift-badge-date {
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: var(--fl-secondary);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.facelift-badge-relative {
+  font-size: 0.8rem;
+  color: var(--fl-text-secondary);
+  margin-top: 0.2rem;
+  font-weight: 500;
+}
+
+/* --- SCENE SLIDER / CAROUSEL --- */
+.facelift-scenes-slider {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* Compact Card */
+.facelift-scene-card {
+  background: rgba(15, 15, 22, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  cursor: pointer;
+  text-decoration: none !important;
+  min-width: 0; /* Prevents text overflow stretching */
+}
+
+.facelift-scene-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fl-primary);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
+}
+
+.facelift-scene-media {
+  position: relative;
+  width: 100%;
+  height: 55%;
+  background: #000;
+  overflow: hidden;
+}
+
+.facelift-scene-screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.facelift-scene-card:hover .facelift-scene-screenshot {
+  transform: scale(1.06);
+}
+
+.facelift-scene-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.facelift-scene-card:hover .facelift-scene-preview {
+  opacity: 1;
+}
+
+.facelift-scene-duration {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 3;
+}
+
+.facelift-scene-content {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  background: rgba(15, 15, 22, 0.95);
+  z-index: 3;
+  min-height: 0;
+}
+
+.facelift-scene-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fl-text-primary);
+  margin: 0 0 0.25rem 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+}
+
+.facelift-scene-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.facelift-scene-playcount {
+  font-size: 0.7rem;
+  background: rgba(168, 85, 247, 0.12);
+  color: #d8b4fe;
+  padding: 0.05rem 0.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.facelift-scene-studio {
+  font-size: 0.7rem;
+  color: var(--fl-secondary);
+  font-weight: 500;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- QUICK LAUNCHPAD WIDGETS --- */
+.facelift-launcher-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.facelift-launcher-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.facelift-launcher-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(4px);
+}
+
+.facelift-launcher-btn.primary:hover { border-color: var(--fl-primary); }
+.facelift-launcher-btn.secondary:hover { border-color: var(--fl-secondary); }
+.facelift-launcher-btn.accent:hover { border-color: var(--fl-accent); }
+
+.facelift-launcher-icon {
+  font-size: 1.25rem;
+}
+
+.facelift-launcher-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.facelift-launcher-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.facelift-launcher-desc {
+  font-size: 0.7rem;
+  color: var(--fl-text-secondary);
+}
+
+/* --- RESUME SECTION (CAROUSEL) --- */
+.facelift-recently-played-carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.facelift-recently-played-carousel > a {
+  flex: 0 0 200px;
+}
+
+/* --- MOOD BOARD WIDGET --- */
+.facelift-mood-board {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.facelift-mood-selectors {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.facelift-mood-chip {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--fl-text-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.facelift-mood-chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.facelift-mood-chip.active {
+  background: linear-gradient(135deg, var(--fl-primary), var(--fl-secondary));
+  border: none;
+  color: #fff;
+}
+
+/* --- SHOW MORE BUTTON --- */
+.facelift-showmore-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.facelift-btn-showmore {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--fl-text-primary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.facelift-btn-showmore:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--fl-secondary);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+  transform: translateY(-2px);
+}
+
+/* --- LOADER & SPINNER --- */
+.facelift-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--fl-text-secondary);
+}
+
+.facelift-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  display: inline-block;
+  border-top-color: var(--fl-primary);
+  border-right-color: var(--fl-secondary);
+  animation: rotation 1.2s infinite linear;
+  margin-bottom: 1rem;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.facelift-empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--fl-text-secondary);
+}
+
+.facelift-empty-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.facelift-empty-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* --- COMPACT SWITCH TO FACELIFT FLOATING BUTTON --- */
+#facelift-restore-fab {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: linear-gradient(135deg, var(--fl-primary), var(--fl-secondary));
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+  cursor: pointer;
+  z-index: 999999;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: var(--fl-font);
+}
+
+#facelift-restore-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+}
+
+/* --- TIME MACHINE STATS PANEL --- */
+.facelift-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.facelift-stat-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.25s ease;
+}
+
+.facelift-stat-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(6, 182, 212, 0.25);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.05);
+  transform: translateY(-1px);
+}
+
+.facelift-stat-icon {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.facelift-stat-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.facelift-stat-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.facelift-stat-label {
+  font-size: 0.65rem;
+  color: var(--fl-text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- VISUAL SNAPSHOT GALLERY --- */
+.facelift-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.facelift-image-card {
+  position: relative;
+  background: #111115;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.facelift-image-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--fl-secondary);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.25);
+}
+
+.facelift-image-card-checkbox-wrapper {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.facelift-image-card-checkbox-placeholder {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.facelift-image-card:hover .facelift-image-card-checkbox-placeholder {
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.facelift-image-card-media {
+  position: relative;
+  aspect-ratio: 1; /* exact square */
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.facelift-image-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.facelift-image-card:hover .facelift-image-card-media img {
+  transform: scale(1.03);
+}
+
+.facelift-image-card-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+}
+
+.facelift-image-card:hover .facelift-image-card-hover-overlay {
+  opacity: 1;
+}
+
+.facelift-image-card-search-icon {
+  font-size: 2.2rem;
+  color: rgba(255, 255, 255, 0.85);
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  transition: transform 0.2s ease;
+}
+
+.facelift-image-card:hover .facelift-image-card-search-icon {
+  transform: scale(1.1);
+}
+
+.facelift-image-card-footer {
+  background: #191922;
+  padding: 0.65rem 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facelift-image-card-title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--fl-text-primary);
+}
+
+.facelift-btn-refresh {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--fl-text-secondary);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.facelift-btn-refresh:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--fl-secondary);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.15);
+}
+
+.facelift-btn-refresh-icon {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.facelift-btn-refresh:hover .facelift-btn-refresh-icon {
+  transform: rotate(180deg);
+}
+
+/* --- LIGHTBOX MODAL --- */
+.facelift-lightbox-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 7, 10, 0.95);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.facelift-lightbox-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 1000000;
+}
+
+.facelift-lightbox-counter {
+  color: var(--fl-text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--fl-font);
+  background: rgba(255,255,255,0.06);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+}
+
+.facelift-lightbox-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.facelift-lightbox-close:hover {
+  color: #fff;
+}
+
+.facelift-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 3rem;
+  width: 54px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000000;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  font-family: monospace;
+}
+
+.facelift-lightbox-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: var(--fl-secondary);
+}
+
+.facelift-lightbox-arrow.left {
+  left: 1.5rem;
+}
+
+.facelift-lightbox-arrow.right {
+  right: 1.5rem;
+}
+
+.facelift-lightbox-content {
+  max-width: 80vw;
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.facelift-lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.facelift-lightbox-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1000000;
+}
+
+.facelift-lightbox-title {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  font-family: var(--fl-font);
+}
+
+.facelift-lightbox-link {
+  color: var(--fl-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  font-family: var(--fl-font);
+}
+
+.facelift-lightbox-link:hover {
+  background: var(--fl-secondary);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+}
+
+
+
+/* --- TABS NAVIGATION BAR --- */
+.facelift-nav-bar {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+.facelift-nav-tab {
+  background: transparent;
+  border: none;
+  color: var(--fl-text-secondary);
+  font-family: var(--fl-font);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 0.25rem;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.facelift-nav-tab:hover {
+  color: #fff;
+}
+
+.facelift-nav-tab.active {
+  color: var(--fl-primary);
+}
+
+.facelift-nav-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--fl-primary), var(--fl-secondary));
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+  transform-origin: bottom center;
+}
+
+.facelift-nav-tab.active::after {
+  transform: scaleX(1);
+}
+
+/* --- SHORTS PLAYER VIEW --- */
+.facelift-shorts-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 200px);
+  padding: 0.5rem 0;
+  box-sizing: border-box;
+  z-index: 1;
+  position: relative;
+}
+
+.facelift-shorts-player {
+  position: relative;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 16px;
+  border: 1px solid var(--fl-panel-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideInShort 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInShort {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.facelift-shorts-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+/* --- CUSTOM SHORTS CONTROLS --- */
+.facelift-shorts-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  user-select: none;
+}
+
+.facelift-shorts-progress {
+  width: 100%;
+  height: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 102;
+}
+
+.facelift-shorts-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  transition: height 0.1s ease;
+}
+
+.facelift-shorts-progress:hover .facelift-shorts-progress-track {
+  height: 5px;
+}
+
+.facelift-shorts-progress-fill {
+  height: 100%;
+  background: #ffa500; /* Stash orange timeline track */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.facelift-shorts-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 42px;
+  padding: 0 10px;
+}
+
+.facelift-shorts-buttons-left,
+.facelift-shorts-buttons-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.facelift-shorts-control-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.1s ease;
+  outline: none;
+}
+
+.facelift-shorts-control-btn:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.facelift-shorts-control-btn.active {
+  color: var(--fl-accent) !important;
+}
+
+.facelift-shorts-speed-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--fl-font);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.15s ease;
+}
+
+.facelift-shorts-speed-btn:hover {
+  color: #fff;
+}
+
+.facelift-shorts-time-display {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Bottom info Overlay */
+.facelift-shorts-info-bottom {
+  position: absolute;
+  bottom: 55px; /* Pushed up to clear controls nicely */
+  left: 0;
+  right: 0;
+  background: transparent;
+  padding: 1.25rem;
+  z-index: 9;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+
+.facelift-shorts-title {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facelift-shorts-studio {
+  color: var(--fl-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.facelift-shorts-performers {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.facelift-shorts-performer-tag {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Large Volume/State indicators */
+.facelift-shorts-state-toast {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.8rem;
+  opacity: 0;
+  z-index: 100;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.facelift-shorts-state-toast.active {
+  animation: pulseToast 0.8s ease-out forwards;
+}
+
+@keyframes pulseToast {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  30% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* --- MOOD BOARD HORIZONTAL CAROUSEL --- */
+.facelift-mood-carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.75rem;
+  width: 100%;
+  /* Fixed height prevents the card from expanding to match the right column */
+  max-height: 260px;
+}
+
+.facelift-mood-carousel > a {
+  flex: 0 0 200px;
+}
+
+.facelift-mood-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.facelift-mood-carousel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 3px;
+}
+.facelift-mood-carousel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+.facelift-mood-carousel::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* --- SCENE MARKERS SPOTLIGHT --- */
+.facelift-marker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.facelift-marker-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--fl-panel-border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.facelift-marker-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--fl-primary);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.15);
+}
+
+.facelift-marker-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+  /* Isolate compositing layer so WebP animation doesn't trigger page-wide repaints */
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+/* Marker previews are animated WebP or video stream — never apply CSS transforms that cause repaints */
+.facelift-marker-card-media img,
+.facelift-marker-card-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Promote to GPU layer so animated WebP/video renders at native framerate */
+  will-change: transform;
+  transform: translateZ(0);
+  /* No transition — animation must render uninterrupted */
+}
+
+.facelift-marker-card-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.facelift-marker-card-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+
+.facelift-marker-card:hover .facelift-marker-card-hover-overlay {
+  opacity: 1;
+}
+
+.facelift-marker-card-play-icon {
+  font-size: 1.5rem;
+  color: #fff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.facelift-marker-card-footer {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: rgba(20, 20, 28, 0.6);
+  backdrop-filter: blur(4px);
+  flex-grow: 1;
+  min-height: 48px;
+}
+
+.facelift-marker-card-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facelift-marker-card-scene-title {
+  font-size: 0.65rem;
+  color: var(--fl-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facelift-marker-card-time {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  z-index: 3;
+}
+
+/* --- SHORTS MODE SCREEN FIT --- */
+.facelift-landing-wrapper.facelift-shorts-mode {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.facelift-shorts-mode .facelift-hero {
+  margin-bottom: 0.5rem;
+}
+
+.facelift-shorts-mode .facelift-nav-bar {
+  margin-bottom: 0.5rem;
+}
+
+.facelift-shorts-mode .facelift-shorts-container {
+  height: calc(100vh - 210px); /* Height reduced to prevent any bottom cutoffs */
+  padding: 0;
+}
+
+/* Force body and parent Stash layout containers to hide scrollbars during Shorts tab view */
+body.facelift-shorts-active,
+.main.facelift-shorts-active,
+.main-container.facelift-shorts-active {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+/* --- DAILY TRENDS VIEW --- */
+.facelift-trends-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.facelift-trends-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.facelift-trends-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.facelift-trends-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.facelift-trends-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0.5rem;
+}
+
+/* Performers cards */
+.facelift-trends-performers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.facelift-trends-performer-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.facelift-trends-performer-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.facelift-trends-performer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.facelift-trends-performer-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.facelift-trends-performer-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--fl-text-secondary);
+}
+
+.facelift-trends-progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.facelift-trends-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--fl-primary), var(--fl-secondary));
+  border-radius: 3px;
+}
+
+/* Tags grid */
+.facelift-trends-tags-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.facelift-trends-tag-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.facelift-trends-tag-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.facelift-trends-tag-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.facelift-trends-tag-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--fl-text-secondary);
+}
+
+/* Scenes list */
+.facelift-trends-scenes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.facelift-trends-scene-card {
+  background: rgba(15, 15, 22, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+}
+
+.facelift-trends-scene-card:hover {
+  border-color: var(--fl-primary);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.25);
+  transform: translateY(-3px);
+}
+
+.facelift-trends-scene-media {
+  height: 55%;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.facelift-trends-scene-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.facelift-trends-scene-card:hover .facelift-trends-scene-media img {
+  transform: scale(1.05);
+}
+
+.facelift-trends-scene-duration {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.facelift-trends-scene-content {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.facelift-trends-scene-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+}
+
+.facelift-trends-scene-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: var(--fl-text-secondary);
+}
+
+.facelift-trends-scene-studio {
+  color: var(--fl-secondary);
+  font-weight: 500;
+  max-width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.facelift-trends-scene-time {
+  background: rgba(6, 182, 212, 0.1);
+  color: #a5f3fc;
+  padding: 0.05rem 0.35rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* --- DAILY TRENDS LAYOUT SPLIT & CALENDAR --- */
+.facelift-trends-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .facelift-trends-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.facelift-trends-calendar-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.facelift-trends-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.facelift-btn-calendar-nav {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--fl-text-primary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.facelift-btn-calendar-nav:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--fl-secondary);
+}
+
+.facelift-trends-calendar-month-year {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.facelift-trends-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.facelift-trends-calendar-weekday {
+  font-size: 0.75rem;
+  color: var(--fl-text-secondary);
+  font-weight: 700;
+}
+
+.facelift-trends-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+}
+
+.facelift-trends-calendar-day {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--fl-text-primary);
+  aspect-ratio: 1;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0;
+}
+
+.facelift-trends-calendar-day:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.facelift-trends-calendar-day.other-month {
+  color: var(--fl-text-muted);
+  opacity: 0.5;
+}
+
+.facelift-trends-calendar-day.has-activity {
+  background: rgba(168, 85, 247, 0.08);
+  border-color: rgba(168, 85, 247, 0.2);
+  color: #d8b4fe;
+}
+
+.facelift-trends-calendar-day.has-activity:hover {
+  background: rgba(168, 85, 247, 0.15);
+}
+
+.facelift-trends-calendar-day.active {
+  background: linear-gradient(135deg, var(--fl-primary), var(--fl-secondary)) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 10px var(--fl-primary-glow);
+  font-weight: 700;
+}
+
+.facelift-trends-calendar-day-dot {
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--fl-secondary);
+}
+
+.facelift-trends-calendar-day.active .facelift-trends-calendar-day-dot {
+  background-color: #fff;
+}
+
+/* --- PERFORMER IMAGES & CLICKABILITY --- */
+.facelift-trends-performer-card {
+  text-decoration: none !important;
+}
+
+.facelift-trends-performer-image-container {
+  width: 100%;
+  height: 300px; /* Taller portrait size matching native Stash performer browser cards */
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.facelift-trends-performer-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.facelift-trends-performer-card:hover .facelift-trends-performer-image {
+  transform: scale(1.04);
+}
+
+.facelift-trends-performer-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--fl-text-muted);
+}
+
+/* --- TAG IMAGES --- */
+.facelift-trends-tag-image-container {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.facelift-trends-tag-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.facelift-trends-tag-card:hover .facelift-trends-tag-image {
+  transform: scale(1.04);
+}
+
+.facelift-trends-tag-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--fl-text-muted);
+}
+
+
+/* --- TOP TAG BANNER --- */
+.facelift-trends-top-tag-banner {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 1.25rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+}
+
+.facelift-trends-top-tag-banner:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--fl-secondary);
+  transform: translateY(-2px);
+}
+
+.facelift-trends-top-tag-banner-media {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.facelift-trends-top-tag-banner-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.facelift-trends-top-tag-banner-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--fl-text-muted);
+}
+
+.facelift-trends-top-tag-banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.facelift-trends-top-tag-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #eab308; /* gold */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.facelift-trends-top-tag-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.facelift-trends-top-tag-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--fl-text-secondary);
+  flex-wrap: wrap;
+}
+
+/* --- GOLDEN GLOWS FOR #1 PLACE --- */
+.facelift-trends-performer-card.first-place,
+.facelift-trends-tag-card.first-place,
+.facelift-trends-top-tag-banner.first-place,
+.facelift-trends-scene-card.first-place {
+  border-color: rgba(234, 179, 8, 0.35) !important;
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.12), inset 0 0 8px rgba(234, 179, 8, 0.03) !important;
+}
+
+.facelift-trends-performer-card.first-place:hover,
+.facelift-trends-tag-card.first-place:hover,
+.facelift-trends-top-tag-banner.first-place:hover,
+.facelift-trends-scene-card.first-place:hover {
+  border-color: rgba(234, 179, 8, 0.7) !important;
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.25), inset 0 0 12px rgba(234, 179, 8, 0.06) !important;
+}
+
+.facelift-trends-tag-card {
+  text-decoration: none !important;
+}
+
+/* --- GALLERY CARDS SELECTION CHECKBOXES --- */
+.facelift-image-card-checkbox-wrapper {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  pointer-events: auto; /* enable click */
+  padding: 4px;
+}
+
+.facelift-image-card-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 0.75rem;
+  font-weight: 800;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.facelift-image-card:hover .facelift-image-card-checkbox {
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+.facelift-image-card-checkbox.checked {
+  border-color: var(--fl-secondary) !important;
+  background: var(--fl-secondary) !important;
+  color: #fff !important;
+  box-shadow: 0 0 8px var(--fl-secondary-glow);
+}
+
+.facelift-image-card.selected {
+  border-color: var(--fl-secondary) !important;
+  box-shadow: 0 0 15px var(--fl-secondary-glow) !important;
+}
+
+/* --- COLLAGE CANVAS WORKSPACE OVERLAY --- */
+.facelift-canvas-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(8, 8, 12, 0.88);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.25s ease-out;
+  overflow: hidden;
+}
+
+.facelift-canvas-header {
+  height: 64px;
+  padding: 0 2rem;
+  background: rgba(20, 20, 28, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.facelift-canvas-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.facelift-canvas-header-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #fff, var(--fl-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.facelift-canvas-header-subtitle {
+  font-size: 0.75rem;
+  color: var(--fl-text-secondary);
+  font-weight: 500;
+}
+
+.facelift-canvas-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.facelift-canvas-area {
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* --- COLLAGE CANVAS WINDOWS --- */
+.facelift-canvas-window {
+  position: absolute;
+  background: rgba(20, 20, 28, 0.75);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Borderless Minimalist Canvas Windows (Used for pure image floating collage) */
+.facelift-canvas-window.borderless {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 4px;
+  overflow: visible; /* show floating buttons */
+  cursor: grab;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.75));
+  transition: outline 0.15s ease, filter 0.15s ease;
+  outline: 1.5px solid transparent;
+}
+
+.facelift-canvas-window.borderless:hover {
+  outline: 1.5px solid rgba(6, 182, 212, 0.45); /* subtle glow outline on hover */
+  filter: drop-shadow(0 20px 35px rgba(6, 182, 212, 0.25)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
+}
+
+.facelift-canvas-window.borderless:focus-within,
+.facelift-canvas-window.borderless.active {
+  outline: 1.5px solid var(--fl-primary);
+  filter: drop-shadow(0 20px 40px rgba(168, 85, 247, 0.3)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
+}
+
+/* Floating overlay buttons on borderless windows */
+.facelift-canvas-window-close-btn,
+.facelift-canvas-window-reset-btn {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(10, 10, 15, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.facelift-canvas-window.borderless:hover .facelift-canvas-window-close-btn,
+.facelift-canvas-window.borderless:hover .facelift-canvas-window-reset-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.facelift-canvas-window-close-btn {
+  top: -12px;
+  right: -12px;
+}
+
+.facelift-canvas-window-close-btn:hover {
+  background: var(--fl-accent) !important;
+  border-color: var(--fl-accent) !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px var(--fl-accent-glow), 0 4px 10px rgba(0, 0, 0, 0.4);
+  transform: scale(1.1);
+}
+
+.facelift-canvas-window-reset-btn {
+  top: -12px;
+  left: -12px;
+}
+
+.facelift-canvas-window-reset-btn:hover {
+  background: var(--fl-secondary) !important;
+  border-color: var(--fl-secondary) !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px var(--fl-secondary-glow), 0 4px 10px rgba(0, 0, 0, 0.4);
+  transform: scale(1.1);
+}
+
+/* Borderless resize handle */
+.facelift-canvas-window-resize-handle.borderless {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 18px;
+  height: 18px;
+  cursor: se-resize;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.5) 50%, transparent 60%, rgba(255, 255, 255, 0.5) 70%);
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.facelift-canvas-window.borderless:hover .facelift-canvas-window-resize-handle.borderless {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.facelift-canvas-window-resize-handle.borderless:hover {
+  background: linear-gradient(135deg, transparent 40%, var(--fl-secondary) 50%, transparent 60%, var(--fl-secondary) 70%);
+  transform: scale(1.1);
+}
+
+/* --- MOBILE LAYOUT OPTIMIZATIONS (iPhone 17 Pro Max / Mobile browsers) --- */
+@media (max-width: 767px) {
+  /* 1. Global Page Adjustments */
+  .facelift-landing-wrapper.facelift-mobile {
+    padding: 0.75rem 0.75rem;
+  }
+
+  .facelift-landing-wrapper.facelift-mobile::before,
+  .facelift-landing-wrapper.facelift-mobile::after {
+    display: none; /* Hide background blur animation spheres on mobile to save GPU cycles & battery */
+  }
+
+  .facelift-mobile .facelift-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .facelift-mobile .facelift-hero-left h1 {
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+  }
+
+  .facelift-mobile .facelift-hero-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* 2. Grid & Rows Adjustments */
+  .facelift-mobile .facelift-row,
+  .facelift-mobile .facelift-row-split,
+  .facelift-mobile .facelift-row-half,
+  .facelift-mobile .facelift-row-thirds,
+  .facelift-mobile .facelift-trends-layout {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .facelift-mobile .facelift-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  /* 3. Navigation Bar */
+  .facelift-mobile .facelift-nav-bar {
+    gap: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .facelift-mobile .facelift-nav-tab {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.1rem;
+  }
+
+  /* 4. Time Machine & Stats Row */
+  .facelift-mobile .facelift-stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem;
+  }
+
+  .facelift-mobile .facelift-stat-card {
+    padding: 0.5rem 0.65rem;
+    gap: 0.5rem;
+  }
+
+  .facelift-mobile .facelift-stat-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+  }
+
+  .facelift-mobile .facelift-stat-value {
+    font-size: 0.9rem;
+  }
+
+  .facelift-mobile .facelift-stat-label {
+    font-size: 0.55rem;
+  }
+
+  .facelift-mobile .facelift-scenes-slider {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem;
+  }
+
+  .facelift-mobile .facelift-scene-card {
+    height: 180px;
+  }
+
+  .facelift-mobile .facelift-scene-title {
+    font-size: 0.75rem;
+  }
+
+  /* 5. Recently Played & Carousels */
+  .facelift-mobile .facelift-recently-played-carousel::-webkit-scrollbar,
+  .facelift-mobile .facelift-mood-carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbars for clean touch layout */
+  }
+
+  .facelift-mobile .facelift-recently-played-carousel > a,
+  .facelift-mobile .facelift-mood-carousel > a {
+    flex: 0 0 140px; /* Slimmer cards in mobile carousels */
+  }
+
+  /* 6. Spotlight Image Gallery Grid */
+  .facelift-mobile .facelift-gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem;
+  }
+
+  .facelift-mobile .facelift-image-card-footer {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .facelift-mobile .facelift-image-card-title {
+    font-size: 0.75rem;
+  }
+
+  /* 7. Marker Spotlight Grid */
+  .facelift-mobile .facelift-marker-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.6rem;
+  }
+
+  .facelift-mobile .facelift-marker-card-footer {
+    min-height: auto;
+    padding: 0.4rem;
+  }
+
+  .facelift-mobile .facelift-marker-card-title {
+    font-size: 0.7rem;
+  }
+
+  .facelift-mobile .facelift-marker-card-scene-title {
+    font-size: 0.6rem;
+  }
+
+  /* 8. Lightbox Responsive Override */
+  .facelift-lightbox-arrow {
+    display: none; /* Arrows are annoying on touch, user swipes or clicks close */
+  }
+
+  .facelift-lightbox-content {
+    max-width: 95vw;
+    max-height: 70vh;
+  }
+
+  .facelift-lightbox-image {
+    max-height: 70vh;
+  }
+
+  .facelift-lightbox-footer {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+
+  /* 9. Shorts Player Mobile Optimization */
+  .facelift-mobile.facelift-shorts-mode .facelift-hero {
+    display: none !important;
+  }
+
+  .facelift-landing-wrapper.facelift-shorts-mode {
+    padding: 0.5rem 0.5rem;
+  }
+
+  .facelift-mobile .facelift-shorts-container {
+    height: calc(100svh - 130px) !important;
+    padding: 0;
+  }
+
+  .facelift-mobile .facelift-shorts-player {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  }
+
+  .facelift-mobile .facelift-shorts-video {
+    object-fit: contain !important; /* Preserves native video aspect ratio */
+  }
+
+  .facelift-mobile .facelift-shorts-buttons-left,
+  .facelift-mobile .facelift-shorts-buttons-right {
+    gap: 8px;
+  }
+
+  .facelift-mobile .facelift-shorts-time-display {
+    font-size: 0.7rem;
+  }
+
+  .facelift-mobile .facelift-shorts-info-bottom {
+    bottom: 52px; /* Clears custom bottom controls bar */
+    left: 10px;
+    right: 10px;
+    padding: 0.5rem;
+    gap: 0.2rem;
+  }
+
+  .facelift-mobile .facelift-shorts-title {
+    font-size: 0.85rem;
+  }
+
+  .facelift-mobile .facelift-shorts-studio {
+    font-size: 0.75rem;
+  }
+
+  .facelift-mobile .facelift-shorts-performer-tag {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.4rem;
+  }
+  
+  /* Prevent scrolling Stash background when inside mobile Shorts tab */
+  body.facelift-shorts-active {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  /* 10. Floating action switch button (Safari bottom bar clearance) */
+  #facelift-restore-fab {
+    bottom: 24px; /* Higher positioning to prevent overlapping iOS Home indicator */
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+
